@@ -29,6 +29,9 @@ const Formulario = () => {
             .then(() => {
                 cambiarNombre('');
                 cambiarCorreo('');
+            }).catch((e)=> {
+                console.log(e);
+                console.log('no se pudo enviar');
             })
         };
     };
