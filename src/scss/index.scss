@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    padding: 32px 0px;
+}
+
+@import "./componentes/formulario";
+@import "./componentes/contacto";
+@import "./componentes/listaDeContacto";
+@import "./componentes/mensajes";

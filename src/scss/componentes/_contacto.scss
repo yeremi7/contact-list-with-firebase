@@ -1,0 +1,115 @@
+.container_contacto{
+    width: 100%;
+    margin-top: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.3);
+    font-weight: 400;
+    font-family: 'Source Sans Pro', sans-serif;
+
+    form{
+        display: flex;
+        flex-direction: column;
+        
+        input{
+            margin-top: 15px;
+            padding: 10px 10px;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(0,0,0,.5);
+            border: none;
+            outline: none;
+            background-color: hsl(360, 10%, 94%);
+            font-family: 'Source Sans Pro', sans-serif;
+    
+            &::placeholder{
+                font-size: 14px;
+                font-weight: 400;
+                color: rgba(0,0,0,.5);
+                font-family: 'Source Sans Pro', sans-serif;
+            }
+        }
+
+        button{
+            align-self: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            padding: 9px 12px;
+            font-size: 14px;
+            font-weight: 400;
+            border: none;
+            border-radius: 5px;
+            color: hsl(360, 0%, 99%);
+            background-color: hsl(240, 95%, 70%);
+            font-family: 'Source Sans Pro', sans-serif;
+            cursor: pointer;
+            transition: background-color .1s linear ;
+            
+            &:hover{
+                background-color: hsla(240, 95%, 70% ,.8);
+            }
+            &:active{
+                background-color: hsl(240, 95%, 70%);
+            }
+        }
+    }
+}
+
+/* Falso */
+.container_editar_contacto{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 400;
+    font-style: italic;
+    font-family: 'Source Sans Pro', sans-serif;
+
+    p{
+        margin-top: 7px;
+        font-size: 16px;
+    }
+}
+
+.container_botones{
+    margin-top: 17px;
+    margin-bottom: 10px;
+}
+.editar{
+    margin-right: 10px;
+    padding: 7px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: hsl(360, 0%, 99%);
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(240, 95%, 70%);
+    font-family: 'Source Sans Pro', sans-serif;
+    cursor: pointer;
+    transition: background-color .1s linear ;
+    
+    &:hover{
+        background-color: hsla(240, 95%, 70% ,.8);
+    }
+    &:active{
+        background-color: hsl(240, 95%, 70%);
+    }
+}
+.borrar{
+    padding: 7px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: hsl(360, 0%, 99%);
+    border: none;
+    border-radius: 5px;
+    background-color: hsl(240, 95%, 70%);
+    font-family: 'Source Sans Pro', sans-serif;
+    cursor: pointer;
+    transition: background-color .1s linear ;
+    
+    &:hover{
+        background-color: hsla(240, 95%, 70% ,.8);
+    }
+    &:active{
+        background-color: hsl(240, 95%, 70%);
+    }
+}
+
