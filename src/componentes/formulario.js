@@ -29,9 +29,6 @@ const Formulario = () => {
             .then(() => {
                 cambiarNombre('');
                 cambiarCorreo('');
-            }).catch((e)=> {
-                console.log(e);
-                console.log('no se pudo enviar');
             })
         };
     };
@@ -51,7 +48,7 @@ const Formulario = () => {
         <>
             <section className="formulario" >
                 
-                <h1 className="title" > Lista de Contacto </h1>
+                <h1 className="title" > Lista de Contactos </h1>
                 
                 <form onSubmit={onSubmit} >
                     <input 
