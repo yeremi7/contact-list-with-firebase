@@ -1,29 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { Contactos } from "./contacto";
+import React, {useEffect, useContext} from 'react';
 import { db } from "../firebase/firebaseConfig";
+import { Contacto } from "../componentes/Contacto";
+import { ContextState } from "../contextAPI/ContextState";
 
 const ListaDeContactos = () => {
 
-    const [agregados, cambiarAgregados] = useState([]);
+    const {docsFirebase, setDocsFirebase} = useContext(ContextState);
 
     useEffect(() => {
+        
         db.collection('contactos').onSnapshot((snapshot) => {
-            cambiarAgregados(snapshot.docs.map((documento) => {
-                return{...documento.data() , id: documento.id}
+            setDocsFirebase(snapshot.docs.map((docs) => {
+                return{...docs.data() , id: docs.id}
             }))
-        })
-    },[])
+        });
+
+    },[]);
 
     return ( 
         <>
             <section className="lista_de_contactos" >
-               {agregados.length > 0 ?
-                   agregados.map((agregado) => (
-                        <Contactos 
-                            key={agregado.id}
-                            id={agregado.id}
-                            nombre={agregado.nombre}
-                            correo={agregado.correo}
+               {docsFirebase.length > 0 ?
+                   docsFirebase.map((docs) => (
+                        <Contacto 
+                            id={docs.id}
+                            key={docs.id}
+                            nombre={docs.nombre}
+                            correo={docs.correo}
                         />
                     ))
                :
@@ -32,6 +35,12 @@ const ListaDeContactos = () => {
             </section>
         </>
     );
+    
+    return ( 
+        <>
+           
+        </>
+     );
 }
  
 export {ListaDeContactos};

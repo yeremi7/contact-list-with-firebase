@@ -1,64 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext} from 'react';
 import { db } from "../firebase/firebaseConfig";
+import { ContextState } from "../contextAPI/ContextState";
+import { useActualizarContacto } from "../hook/useActualizarContacto";
 
-const Contactos = ({id, nombre, correo}) => {
+const Contacto = ({id, nombre, correo}) => {
 
-    const [editandoContacto, cambiarEditandoContacto] = useState(false);
-    const [nuevoNombre , CambiarNuevoNombre] = useState(nombre);
-    const [nuevoCorreo , CambiarNuevoCorreo] = useState(correo);
-    const [alerta, cambiarAlerta] = useState(false);
-    const [mensajeError, cambiarMensajeError] = useState({});
+    const {nuevoNombre,
+           nuevoCorreo,
+           editarContacto, 
+           alerta2, 
+           mensaje, 
+           cambiarEditarContacto,
+           cambiarNuevoNombre, 
+           cambiarNuevoCorreo} = useContext(ContextState);
+         
+    const [actualizarContacto] = useActualizarContacto();
 
-    const actualizarContacto = (e) => {
+    const actualizarContactos = (e) => {
         e.preventDefault();
-
-        const expresionRegular = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/;
-       
-        if (nuevoNombre === '' || nuevoCorreo === '' ) {
-            cambiarAlerta(true);
-            cambiarMensajeError({mensaje:'Rellene todos los datos*'});
-
-        } else if (!expresionRegular.test(nuevoCorreo)) {
-            cambiarAlerta(true);
-            cambiarMensajeError({mensaje:'Coloque un correo correcto*'});
-            
-        }else{
-            db.collection('contactos').doc(id).update({
-                nombre: nuevoNombre,
-                correo: nuevoCorreo
-            })
-            .then(() => {
-                cambiarEditandoContacto(false);
-            })
-            
-        };
+        actualizarContacto(id);
     };
 
     const eliminarContacto = (id) => {
-        db.collection('contactos').doc(id).delete()
+        db.collection('contactos').doc(id).delete();
     };
-
-    useEffect(() => {
-        let tiempo;
-
-        if (alerta === true) {
-            tiempo = setTimeout(() => {
-                cambiarAlerta(false);
-            }, 3000);
-        }
-        return(() => clearTimeout(tiempo))
-    },[alerta, cambiarAlerta]);
 
     return ( 
         <>
             <section className="container_contacto" >
-               {editandoContacto ? 
-                    <form onSubmit={actualizarContacto} >
+               {editarContacto ? 
+                    <form onSubmit={actualizarContactos} >
                         <input 
                             type="text"
                             name="nombre"
                             value={nuevoNombre}
-                            onChange={(e) => CambiarNuevoNombre(e.target.value)}
+                            onChange={(e) => cambiarNuevoNombre(e.target.value)}
                             placeholder="Nombre"
                         />
                     
@@ -66,29 +42,30 @@ const Contactos = ({id, nombre, correo}) => {
                             type="text"
                             name="correo"
                             value={nuevoCorreo}
-                            onChange={(e) => CambiarNuevoCorreo(e.target.value)}
+                            onChange={(e) => cambiarNuevoCorreo(e.target.value)}
                             placeholder="Correo"
                         />
 
-                        {alerta &&
-                            <p className="mensajeAlerta" > {mensajeError.mensaje} </p>
+                        {alerta2 &&
+                            <p className="mensajeAlerta" > {mensaje.mensaje} </p>
                         }
-                    
-                        <button type="submit" >Actualizar</button>
+                        
+                            <button type="submit" >Actualizar</button>
+                        
                     </form>
                 :
                     <div className="container_editar_contacto" >
                         <p> {nombre} </p>
                         <p> {correo} </p>
                         <div className="container_botones">
-                            <button onClick={() => cambiarEditandoContacto(!editandoContacto)} className="editar" >Editar</button>
+                            <button onClick={() => cambiarEditarContacto(!editarContacto)} className="editar" >Editar</button>
                             <button onClick={() => eliminarContacto(id)} className="borrar" >Borrar</button>
                         </div> 
                     </div>
             }
             </section>    
         </>
-     );
+    );
 }
  
-export {Contactos};
+export {Contacto} ;

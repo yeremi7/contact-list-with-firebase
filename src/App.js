@@ -1,13 +1,16 @@
 import React from 'react';
 import './index.css';
-import { Formulario } from "./componentes/formulario";
-import { ListaDeContactos } from "./componentes/listaDeContacto";
+import { FormularioContacto } from "./componentes/FormularioContacto";
+import { ListaDeContactos } from "./componentes/ListaDeContacto";
+import { ProveedorState } from "./contextAPI/ContextState";
 
 const App = () => {
   return(
     <>
-      <Formulario />
-      <ListaDeContactos/>
+      <ProveedorState>
+        <FormularioContacto />
+        <ListaDeContactos />
+      </ProveedorState>
     </>
   )
 }
